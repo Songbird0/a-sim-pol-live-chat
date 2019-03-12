@@ -1,0 +1,5 @@
+#message-list {
+  overflow: auto;
+  height: 200px;
+  padding: 5%;
+}

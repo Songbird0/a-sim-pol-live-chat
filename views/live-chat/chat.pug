@@ -1,0 +1,40 @@
+doctype html
+html(lang="fr")
+  head
+    title My sim-pol live chat!
+    meta(charset="utf-8")
+    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css")
+    link(rel="stylesheet", href="/commons/css/bulma.min.css")
+  body
+    #live-chat.columns.is-multiline
+      .column.is-full
+      .column.is-4.is-offset-4
+        .box
+          #message-list.has-background-light
+            if messageList.length === 0
+              p Nothing here!
+            else
+              each message in messageList
+                p #{message.date} #{message.username}: #{message.content}
+        form(action="/", method="post")
+          .field
+            .control.has-icons-left
+              if isRegistered
+                input.input(type="text", placeholder="Write your prose...", name="userTextMessage")
+                span.icon.is-left
+                  i.far.fa-arrow-alt-circle-right
+              else
+                input.input.is-danger(type="text", placeholder="Pick a name before chatting!", name="userTextMessage" disabled)
+                span.icon.is-left
+                  i.fas.fa-times-circle
+      if !isRegistered
+        #register-box.column.is-2
+          .box
+              form(action="/", method="post")
+                .field
+                  label.label Your name:
+                  .control
+                    input.input(type="text", placeholder="John Doe", name="wishedUsername")
+                .field
+                  .control
+                    input.button(type="submit", value="Go!", name="registration")
